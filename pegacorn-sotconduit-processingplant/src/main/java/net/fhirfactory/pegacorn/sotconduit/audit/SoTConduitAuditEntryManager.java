@@ -34,6 +34,8 @@ import net.fhirfactory.pegacorn.petasos.model.uow.UoW;
 import net.fhirfactory.pegacorn.petasos.model.uow.UoWPayload;
 import net.fhirfactory.pegacorn.petasos.model.uow.UoWProcessingOutcomeEnum;
 import net.fhirfactory.pegacorn.petasos.model.wup.WUPIdentifier;
+import net.fhirfactory.pegacorn.util.FHIRContextUtility;
+
 import org.hl7.fhir.r4.model.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,11 +61,13 @@ public class SoTConduitAuditEntryManager {
     @Inject
     private PetasosSTAServicesAuditOnlyBroker servicesBroker;
 
+    @Inject
+    protected FHIRContextUtility fHIRContextUtility;   
+    
     @PostConstruct
     protected void initialise() {
         LOG.debug(".initialise(): Entry");
-        FhirContext newContext = FhirContext.forR4();
-        this.parserR4 = newContext.newJsonParser();
+        this.parserR4 = fHIRContextUtility.getJsonParser();
         LOG.debug(".initialise(): Exit");
     }
 
