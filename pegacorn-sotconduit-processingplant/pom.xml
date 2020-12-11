@@ -6,6 +6,7 @@
         <artifactId>pegacorn-sotconduit</artifactId>
         <groupId>net.fhirfactory.pegacorn</groupId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pegacorn-sotconduit</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
