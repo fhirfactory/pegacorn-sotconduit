@@ -1,5 +1,22 @@
 package net.fhirfactory.pegacorn.sotconduit.edge.answer.accessor;
 
+import java.io.Serializable;
+import java.sql.Date;
+import java.time.Instant;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+
+import org.hl7.fhir.r4.model.Bundle;
+import org.hl7.fhir.r4.model.IdType;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.Property;
+import org.hl7.fhir.r4.model.Resource;
+import org.slf4j.Logger;
+
 import ca.uhn.fhir.parser.IParser;
 import net.fhirfactory.pegacorn.common.model.FDN;
 import net.fhirfactory.pegacorn.common.model.RDN;
@@ -19,17 +36,6 @@ import net.fhirfactory.pegacorn.petasos.model.wup.WUPJobCard;
 import net.fhirfactory.pegacorn.sotconduit.audit.SoTConduitActionEnum;
 import net.fhirfactory.pegacorn.sotconduit.audit.SoTConduitAuditEntryManager;
 import net.fhirfactory.pegacorn.util.FHIRContextUtility;
-import org.hl7.fhir.r4.model.*;
-import org.slf4j.Logger;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import java.io.Serializable;
-import java.sql.Date;
-import java.time.Instant;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public abstract class SoTConduitGatekeeperBase {
 
@@ -176,7 +182,7 @@ public abstract class SoTConduitGatekeeperBase {
         getLogger().trace(".specifyNode(): Constructing WUP Node, Setting Version Number");
         accessor.setVersion(this.version);
         getLogger().trace(".specifyNode(): Constructing WUP Node, Setting Node Instance");
-        accessor.setNodeInstanceID(workshopId);
+        accessor.setNodeInstanceID(accessorInstanceIdentifier);
         getLogger().trace(".specifyNode(): Constructing WUP Node, Setting Concurrency Mode");
         accessor.setConcurrencyMode(workshopNode.getConcurrencyMode());
         getLogger().trace(".specifyNode(): Constructing WUP Node, Setting Resillience Mode");
